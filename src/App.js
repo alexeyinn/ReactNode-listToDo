@@ -2,9 +2,7 @@ import React from "react";
 
 import "./index.scss";
 
-import List from "./components/List";
-import Tasks from "./components/Tasks";
-import AddButtonList from "./components/AddButtonList";
+import { List, Tasks, AddButtonList } from "./components";
 import db from "./assets/db.json";
 
 export default function App() {

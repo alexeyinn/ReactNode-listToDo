@@ -1,7 +1,6 @@
 import React from "react";
 
-import List from "../List";
-import Badge from "../Badge";
+import { List, Badge } from "../index";
 import "./AddButtonList.scss";
 
 export default function AddButtonList({ colors, onAdd }) {
