@@ -1,12 +1,19 @@
 import "./Tasks.scss";
 import editSVG from "../../assets/img/edit.svg";
 
-export default function Tasks({ list }) {
+export default function Tasks({ list, onEditTitle }) {
+  const editTitle = () => {
+    const newTitle = window.prompt("Введите название списка", list.item);
+    if (newTitle) {
+      onEditTitle(list.id, newTitle);
+    }
+  };
+
   return (
     <div className="tasks">
       <h2 className="tasks__title">
         {list.name}
-        <img src={editSVG} alt="Edit icon" />
+        <img onClick={editTitle} src={editSVG} alt="Edit icon" />
       </h2>
       <div className="tasks__items">
         {!list.tasks.length && <h2>Задачи отсутсвуют</h2>}
