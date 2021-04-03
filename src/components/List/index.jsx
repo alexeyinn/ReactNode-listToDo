@@ -24,7 +24,9 @@ export default function List({ items, isRemovable, onClick, onRemove }) {
           className={classNames(item.className, { active: item.active })}
         >
           <i>{item.icon ? item.icon : <Badge color={item.color.name} />}</i>
-          <span>{item.name}</span>
+          <span>{item.name}
+          {item.tasks && ` (${item.tasks.length})`}
+          </span>
           {isRemovable && (
             <img
               className="list__remove-icon"

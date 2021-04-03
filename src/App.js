@@ -29,7 +29,6 @@ export default function App() {
     setLists(newList);
   };
 
-  //26.23 Все реакт компоненты объединить в один индекс файл. Посмотреть что там дальше делается на бэкенде и поднять в отдельном проекте
   return (
     <div className="todo">
       <div className="todo__sidebar">
