@@ -8,7 +8,8 @@ export default function Tasks({ list }) {
         {list.name}
         <img src={editSVG} alt="Edit icon" />
       </h2>
-      <div className="tasks__item">
+      <div className="tasks__items">
+        {!list.tasks.length && <h2>Задачи отсутсвуют</h2>}
         {list.tasks.map((task) => (
           <div key={task.id} className="tasks__items-row">
             <div className="checkbox">
