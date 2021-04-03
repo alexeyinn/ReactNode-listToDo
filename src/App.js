@@ -72,7 +72,9 @@ export default function App() {
         )}
         <AddButtonList onAdd={onAddList} colors={colors} />
       </div>
-      <div className="todo__tasks">{lists && <Tasks list={lists[1]} />}</div>
+      <div className="todo__tasks">
+        {lists && activeItem && <Tasks list={activeItem} />}
+      </div>
     </div>
   );
 }
