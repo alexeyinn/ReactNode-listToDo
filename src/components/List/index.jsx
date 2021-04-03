@@ -5,7 +5,14 @@ import Badge from "../Badge";
 import "./List.scss";
 import removeSVG from "../../assets/img/remove.svg";
 
-export default function List({ items, isRemovable, onClick, onRemove }) {
+export default function List({
+  items,
+  isRemovable,
+  onClick,
+  onRemove,
+  onClickItem,
+  activeItem
+}) {
   const removeList = (item) => {
     if (window.confirm("Вы действительно хотите удалить список задач?")) {
       axios
@@ -21,11 +28,19 @@ export default function List({ items, isRemovable, onClick, onRemove }) {
       {items.map((item, index) => (
         <li
           key={index}
-          className={classNames(item.className, { active: item.active })}
+          className={classNames(item.className, {
+            active: activeItem && activeItem.id === item.id
+          })}
+          onClick={
+            onClickItem
+              ? () => onClickItem(item)
+              : () => console.log("Click on folder!")
+          }
         >
           <i>{item.icon ? item.icon : <Badge color={item.color.name} />}</i>
-          <span>{item.name}
-          {item.tasks && ` (${item.tasks.length})`}
+          <span>
+            {item.name}
+            {item.tasks && ` (${item.tasks.length})`}
           </span>
           {isRemovable && (
             <img
