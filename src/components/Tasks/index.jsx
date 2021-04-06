@@ -3,14 +3,22 @@ import axios from "axios";
 import "./Tasks.scss";
 import editSVG from "../../assets/img/edit.svg";
 
-export default function Tasks({ list, onEditTitle }) {
+import AddTaskForm from "./AddTaskForm";
+
+export default function Tasks({ list, onEditTitle, onAddTask }) {
   const editTitle = () => {
     const newTitle = window.prompt("Введите название списка", list.item);
     if (newTitle) {
       onEditTitle(list.id, newTitle);
-      axios.patch("https://2dof6-3001.sse.codesandbox.io/lists/" + list.id, {
-        name: newTitle
-      });
+      axios
+        .patch("https://2dof6-3001.sse.codesandbox.io/lists/" + list.id, {
+          name: newTitle
+        })
+        .catch(() => {
+          alert(
+            "Не удалось обновить название списка задач на сервере! Обновите страницу и повторите попытку."
+          );
+        });
     }
   };
 
@@ -47,6 +55,7 @@ export default function Tasks({ list, onEditTitle }) {
             <input readOnly value={task.text} />
           </div>
         ))}
+        <AddTaskForm list={list} onAddTask={onAddTask} />
       </div>
     </div>
   );

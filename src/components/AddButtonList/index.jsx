@@ -33,6 +33,9 @@ export default function AddButtonList({ colors, onAdd }) {
         onAdd(listObj);
         addOnClick();
       })
+      .catch(() => {
+        alert("Ошибка при добавлении списка задач! Попробуйте снова!");
+      })
       .finally(() => {
         setIsLoading(false);
       });
