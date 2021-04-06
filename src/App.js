@@ -56,6 +56,7 @@ export default function App() {
         <List
           items={[
             {
+              active: true,
               icon: (
                 <svg
                   width="18"
