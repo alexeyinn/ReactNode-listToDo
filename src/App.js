@@ -102,6 +102,7 @@ export default function App() {
                 list={list}
                 onAddTask={onAddTask}
                 onEditTitle={onEditListTitle}
+                withoutEmpty
               />
             ))}
         </Route>

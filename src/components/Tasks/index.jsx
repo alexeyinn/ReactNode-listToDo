@@ -5,7 +5,7 @@ import editSVG from "../../assets/img/edit.svg";
 
 import AddTaskForm from "./AddTaskForm";
 
-export default function Tasks({ list, onEditTitle, onAddTask }) {
+export default function Tasks({ list, onEditTitle, onAddTask, withoutEmpty }) {
   const editTitle = () => {
     const newTitle = window.prompt("Введите название списка", list.item);
     if (newTitle) {
@@ -29,7 +29,7 @@ export default function Tasks({ list, onEditTitle, onAddTask }) {
         <img onClick={editTitle} src={editSVG} alt="Edit icon" />
       </h2>
       <div className="tasks__items">
-        {!list.tasks.length && <h2>Задачи отсутсвуют</h2>}
+        {!withoutEmpty && !list.tasks.length && <h2>Задачи отсутсвуют</h2>}
         {list.tasks.map((task) => (
           <div key={task.id} className="tasks__items-row">
             <div className="checkbox">
