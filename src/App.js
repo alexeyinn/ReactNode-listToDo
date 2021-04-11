@@ -56,6 +56,23 @@ export default function App() {
     setLists(newList);
   };
 
+  const onRemoveTask = (listId, taskId) => {
+    if (window.confirm("Вы действительно хотите удалить задачу?")) {
+      const newList = lists.map((item) => {
+        if (item.id === listId) {
+          item.tasks = item.tasks.filter((task) => task.id !== taskId);
+        }
+        return item;
+      });
+      setLists(newList);
+      axios
+        .delete("https://2dof6-3001.sse.codesandbox.io/tasks/" + taskId)
+        .catch(() => {
+          alert("Не удалось удалить задачу! Попробуйте снова!");
+        });
+    }
+  };
+
   useEffect(() => {
     const listId = history.location.pathname.split("lists/")[1];
     if (lists) {
@@ -121,6 +138,7 @@ export default function App() {
                 list={list}
                 onAddTask={onAddTask}
                 onEditTitle={onEditListTitle}
+                onRemoveTask={onRemoveTask}
                 withoutEmpty
               />
             ))}
@@ -131,6 +149,7 @@ export default function App() {
               list={activeItem}
               onAddTask={onAddTask}
               onEditTitle={onEditListTitle}
+              onRemoveTask={onRemoveTask}
             />
           )}
         </Route>

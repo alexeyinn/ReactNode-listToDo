@@ -6,7 +6,13 @@ import editSVG from "../../assets/img/edit.svg";
 import AddTaskForm from "./AddTaskForm";
 import Task from "./Task";
 
-export default function Tasks({ list, onEditTitle, onAddTask, withoutEmpty }) {
+export default function Tasks({
+  list,
+  onEditTitle,
+  onAddTask,
+  onRemoveTask,
+  withoutEmpty
+}) {
   const editTitle = () => {
     const newTitle = window.prompt("Введите название списка", list.item);
     if (newTitle) {
@@ -32,7 +38,7 @@ export default function Tasks({ list, onEditTitle, onAddTask, withoutEmpty }) {
       <div className="tasks__items">
         {!withoutEmpty && !list.tasks.length && <h2>Задачи отсутсвуют</h2>}
         {list.tasks.map((task) => (
-          <Task key={task.id} {...task} />
+          <Task key={task.id} {...task} list={list} onRemove={onRemoveTask} />
         ))}
         <AddTaskForm list={list} onAddTask={onAddTask} />
       </div>
