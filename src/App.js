@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import { Route } from "react-router-dom";
+import { Route, useHistory } from "react-router-dom";
 
 import "./index.scss";
 
@@ -10,8 +10,9 @@ export default function App() {
   const [lists, setLists] = useState(null);
   const [colors, setColors] = useState(null);
   const [activeItem, setActiveItem] = useState(null);
+  let history = useHistory();
 
-  useEffect(() => {
+  const dataGetting = () => {
     axios
       .get(
         "https://2dof6-3001.sse.codesandbox.io/lists?_expand=color&_embed=tasks"
@@ -24,6 +25,10 @@ export default function App() {
       .then(({ data }) => {
         setColors(data);
       });
+  };
+
+  useEffect(() => {
+    dataGetting();
   }, []);
 
   const onAddList = (obj) => {
@@ -51,13 +56,25 @@ export default function App() {
     setLists(newList);
   };
 
+  useEffect(() => {
+    const listId = history.location.pathname.split("lists/")[1];
+    if (lists) {
+      const list = lists.find((list) => list.id === Number(listId));
+      setActiveItem(list);
+    }
+  }, [lists, history.location.pathname]);
+
   return (
     <div className="todo">
       <div className="todo__sidebar">
         <List
+          onClickItem={(list) => {
+            history.push("/");
+            dataGetting();
+          }}
           items={[
             {
-              active: true,
+              active: history.location.pathname === "/",
               icon: (
                 <svg
                   width="18"
@@ -83,8 +100,9 @@ export default function App() {
               const newLists = lists.filter((item) => item.id !== id);
               setLists(newLists);
             }}
-            onClickItem={(item) => {
-              setActiveItem(item);
+            onClickItem={(list) => {
+              history.push(`/lists/${list.id}`);
+              dataGetting();
             }}
             activeItem={activeItem}
             isRemovable
@@ -99,6 +117,7 @@ export default function App() {
           {lists &&
             lists.map((list) => (
               <Tasks
+                key={list.id}
                 list={list}
                 onAddTask={onAddTask}
                 onEditTitle={onEditListTitle}
