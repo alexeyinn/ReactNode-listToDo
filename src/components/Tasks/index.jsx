@@ -11,7 +11,8 @@ export default function Tasks({
   onEditTitle,
   onAddTask,
   onRemoveTask,
-  withoutEmpty
+  withoutEmpty,
+  onEditTask
 }) {
   const editTitle = () => {
     const newTitle = window.prompt("Введите название списка", list.item);
@@ -38,7 +39,13 @@ export default function Tasks({
       <div className="tasks__items">
         {!withoutEmpty && !list.tasks.length && <h2>Задачи отсутсвуют</h2>}
         {list.tasks.map((task) => (
-          <Task key={task.id} {...task} list={list} onRemove={onRemoveTask} />
+          <Task
+            key={task.id}
+            {...task}
+            list={list}
+            onRemove={onRemoveTask}
+            onEditTask={onEditTask}
+          />
         ))}
         <AddTaskForm list={list} onAddTask={onAddTask} />
       </div>

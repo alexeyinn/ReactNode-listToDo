@@ -73,6 +73,38 @@ export default function App() {
     }
   };
 
+  const onEditTask = (listId, taskObj) => {
+    const newTaskText = window.prompt(
+      "Введите новый текст задачи",
+      taskObj.text
+    );
+
+    if (!newTaskText) {
+      alert("Текст задачи, не может быть пустым! Попробуйте снова!");
+      return;
+    }
+
+    const newList = lists.map((list) => {
+      if (list.id === listId) {
+        list.tasks = list.tasks.map((task) => {
+          if (task.id === taskObj.id) {
+            task.text = newTaskText;
+          }
+          return task;
+        });
+      }
+      return list;
+    });
+    setLists(newList);
+    axios
+      .patch("https://2dof6-3001.sse.codesandbox.io/tasks/" + taskObj.id, {
+        text: newTaskText
+      })
+      .catch(() => {
+        alert("Не удалось Обновить задачу! Попробуйте снова!");
+      });
+  };
+
   useEffect(() => {
     const listId = history.location.pathname.split("lists/")[1];
     if (lists) {
@@ -80,7 +112,7 @@ export default function App() {
       setActiveItem(list);
     }
   }, [lists, history.location.pathname]);
-
+  //1.28
   return (
     <div className="todo">
       <div className="todo__sidebar">
@@ -139,6 +171,7 @@ export default function App() {
                 onAddTask={onAddTask}
                 onEditTitle={onEditListTitle}
                 onRemoveTask={onRemoveTask}
+                onEditTask={onEditTask}
                 withoutEmpty
               />
             ))}
@@ -150,6 +183,7 @@ export default function App() {
               onAddTask={onAddTask}
               onEditTitle={onEditListTitle}
               onRemoveTask={onRemoveTask}
+              onEditTask={onEditTask}
             />
           )}
         </Route>

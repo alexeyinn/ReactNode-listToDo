@@ -1,4 +1,4 @@
-export default function Task({ id, text, list, onRemove }) {
+export default function Task({ id, text, list, onRemove, onEditTask }) {
   return (
     <div key={id} className="tasks__items-row">
       <div className="checkbox">
@@ -23,7 +23,7 @@ export default function Task({ id, text, list, onRemove }) {
       </div>
       <p>{text}</p>
       <div className="tasks__items-row-actions">
-        <div>
+        <div onClick={() => onEditTask(list.id, { id, text })}>
           <svg
             width="15"
             height="15"
