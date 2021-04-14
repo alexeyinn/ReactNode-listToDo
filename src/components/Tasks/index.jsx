@@ -47,7 +47,7 @@ export default function Tasks({
             onEditTask={onEditTask}
           />
         ))}
-        <AddTaskForm list={list} onAddTask={onAddTask} />
+        <AddTaskForm key={list.id} list={list} onAddTask={onAddTask} />
       </div>
     </div>
   );
