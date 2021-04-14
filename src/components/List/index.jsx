@@ -33,11 +33,7 @@ export default function List({
               ? item.active
               : activeItem && activeItem.id === item.id
           })}
-          onClick={
-            onClickItem
-              ? () => onClickItem(item)
-              : () => console.log("Click on folder!")
-          }
+          onClick={onClickItem && (() => onClickItem(item))}
         >
           <i>{item.icon ? item.icon : <Badge color={item.color.name} />}</i>
           <span>
