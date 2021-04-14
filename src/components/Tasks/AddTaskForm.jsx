@@ -21,7 +21,7 @@ export default function AddTaskForm({ list, onAddTask }) {
     };
     setIsLoading(true);
     axios
-      .post("https://2dof6-3001.sse.codesandbox.io/tasks", obj)
+      .post("http://localhost:3001/tasks", obj)
       .then(({ data }) => {
         onAddTask(list.id, data);
         toggleFormVisible();

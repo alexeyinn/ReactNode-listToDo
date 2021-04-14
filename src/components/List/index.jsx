@@ -16,7 +16,7 @@ export default function List({
   const removeList = (item) => {
     if (window.confirm("Вы действительно хотите удалить список задач?")) {
       axios
-        .delete("https://2dof6-3001.sse.codesandbox.io/lists/" + item.id)
+        .delete("http://localhost:3001/lists/" + item.id)
         .then(() => {
           onRemove(item.id);
         });

@@ -23,7 +23,7 @@ export default function AddButtonList({ colors, onAdd }) {
     }
     setIsLoading(true);
     axios
-      .post("https://2dof6-3001.sse.codesandbox.io/lists", {
+      .post("http://localhost:3001/lists", {
         name: inputValue,
         colorId: selectedColor
       })

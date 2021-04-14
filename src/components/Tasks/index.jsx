@@ -20,7 +20,7 @@ export default function Tasks({
     if (newTitle) {
       onEditTitle(list.id, newTitle);
       axios
-        .patch("https://2dof6-3001.sse.codesandbox.io/lists/" + list.id, {
+        .patch("http://localhost:3001/lists/" + list.id, {
           name: newTitle
         })
         .catch(() => {
