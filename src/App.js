@@ -112,7 +112,7 @@ export default function App() {
       setActiveItem(list);
     }
   }, [lists, history.location.pathname]);
-  //1.28
+
   return (
     <div className="todo">
       <div className="todo__sidebar">

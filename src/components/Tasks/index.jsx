@@ -37,16 +37,19 @@ export default function Tasks({
         <img onClick={editTitle} src={editSVG} alt="Edit icon" />
       </h2>
       <div className="tasks__items">
-        {!withoutEmpty && !list.tasks.length && <h2>Задачи отсутсвуют</h2>}
-        {list.tasks.map((task) => (
-          <Task
-            key={task.id}
-            {...task}
-            list={list}
-            onRemove={onRemoveTask}
-            onEditTask={onEditTask}
-          />
-        ))}
+        {!withoutEmpty && list.tasks && !list.tasks.length && (
+          <h2>Задачи отсутсвуют</h2>
+        )}
+        {list.tasks &&
+          list.tasks.map((task) => (
+            <Task
+              key={task.id}
+              {...task}
+              list={list}
+              onRemove={onRemoveTask}
+              onEditTask={onEditTask}
+            />
+          ))}
         <AddTaskForm key={list.id} list={list} onAddTask={onAddTask} />
       </div>
     </div>
