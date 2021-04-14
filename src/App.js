@@ -105,6 +105,28 @@ export default function App() {
       });
   };
 
+  const onCompleteTask = (listId, taskId, completed) => {
+    const newList = lists.map((list) => {
+      if (list.id === listId) {
+        list.tasks = list.tasks.map((task) => {
+          if (task.id === taskId) {
+            task.completed = completed;
+          }
+          return task;
+        });
+      }
+      return list;
+    });
+    setLists(newList);
+    axios
+      .patch("https://2dof6-3001.sse.codesandbox.io/tasks/" + taskId, {
+        completed
+      })
+      .catch(() => {
+        alert("Не удалось обновить задачу");
+      });
+  };
+
   useEffect(() => {
     const listId = history.location.pathname.split("lists/")[1];
     if (lists) {
@@ -172,6 +194,7 @@ export default function App() {
                 onEditTitle={onEditListTitle}
                 onRemoveTask={onRemoveTask}
                 onEditTask={onEditTask}
+                onCompleteTask={onCompleteTask}
                 withoutEmpty
               />
             ))}
@@ -184,6 +207,7 @@ export default function App() {
               onEditTitle={onEditListTitle}
               onRemoveTask={onRemoveTask}
               onEditTask={onEditTask}
+              onCompleteTask={onCompleteTask}
             />
           )}
         </Route>

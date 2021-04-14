@@ -1,8 +1,25 @@
-export default function Task({ id, text, list, onRemove, onEditTask }) {
+export default function Task({
+  id,
+  text,
+  completed,
+  onCompleteTask,
+  list,
+  onRemove,
+  onEditTask
+}) {
+  const onChangeCheckBox = (e) => {
+    onCompleteTask(list.id, id, e.target.checked);
+  };
+
   return (
     <div key={id} className="tasks__items-row">
       <div className="checkbox">
-        <input id={`task-${id}`} type="checkbox" />
+        <input
+          onChange={onChangeCheckBox}
+          checked={completed}
+          id={`task-${id}`}
+          type="checkbox"
+        />
         <label htmlFor={`task-${id}`}>
           <svg
             width="11"
