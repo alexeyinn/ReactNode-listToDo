@@ -1,6 +1,8 @@
-Результат прохождения вебинара - https://www.youtube.com/watch?v=PGZ6HtgSeio&t=1840s&ab_channel=ArchakovBlog
+Результат прохождения вебинара - https://www.youtube.com/watch?v=PGZ6HtgSeio&t=1840s
 
-CRUD SPA. Frontend - React.js (Hooks, Routing). Backend - Node.js (Axios, Express, Fake-JSON-server)
+CRUD SPA.
+Frontend - React.js (Hooks, Routing).
+Backend - Node.js (Axios, Express, Fake-JSON-server)
 
 Для запуска проекта:
 
@@ -10,4 +12,4 @@ CRUD SPA. Frontend - React.js (Hooks, Routing). Backend - Node.js (Axios, Expres
 
 После запуска сервера, в другом терминале, для запуска fake DB - npm run fake
 
-После запуска фейковой базы данных, для сборки frontenda приложения - npm run start
+После запуска фейковой базы данных, для сборки frontend-a приложения - npm run start
